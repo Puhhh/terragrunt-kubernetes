@@ -1,0 +1,155 @@
+---
+global:
+  domain: ${argocd-host}
+
+controller:
+  replicas: ${replicas-count}
+
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
+
+applicationSet:
+  replicaCount: ${replicas-count}
+
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+dex:
+  enabled: false
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+
+redis:
+  resources:
+    limits:
+      cpu: 50m
+      memory: 64Mi
+    requests:
+      cpu: 10m
+      memory: 32Mi
+
+repoServer:
+  autoscaling:
+    behavior: {}
+    enabled: false
+    maxReplicas: 5
+    minReplicas: ${replicas-count}
+    targetCPUUtilizationPercentage: 50
+    targetMemoryUtilizationPercentage: 50
+
+  replicas: ${replicas-count}
+
+  resources:
+    limits:
+      cpu: 50m
+      memory: 128Mi
+    requests:
+      cpu: 10m
+      memory: 64Mi
+
+  initContainers:
+    - name: init
+      image: grafana/alpine:3.15.4
+      command: ["/bin/sh", "-c"]
+      args: ["update-ca-certificates && cp -r /etc/ssl/certs/* /artifact/"]
+      volumeMounts:
+        - name: certs
+          mountPath: /usr/local/share/ca-certificates/${configmap-name}.crt
+          subPath: ${configmap-name}.pem
+          readOnly: false
+        - name: temp
+          mountPath: /artifact
+          readOnly: false
+
+  volumeMounts:
+    - name: temp
+      mountPath: /etc/ssl/certs
+      readOnly: false
+
+  volumes:
+    - name: certs
+      configMap:
+        name: ${configmap-name}
+    - name: temp
+      emptyDir: {}
+
+notifications:
+  podLabels:
+    app: notifications
+  resources:
+    limits:
+      cpu: 50m
+      memory: 64Mi
+    requests:
+      cpu: 10m
+      memory: 32Mi
+
+configs:
+  ssh:
+    knownHosts: ""
+  cm:
+    accounts.admin: apiKey
+
+server:
+  autoscaling:
+    behavior: {}
+    enabled: false
+    maxReplicas: 5
+    minReplicas: ${replicas-count}
+    targetCPUUtilizationPercentage: 50
+    targetMemoryUtilizationPercentage: 50
+
+  replicas: ${replicas-count}
+
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+  extraArgs:
+    - "--insecure"
+  ingress:
+    enabled: false
+
+  initContainers:
+    - name: init
+      image: grafana/alpine:3.15.4
+      command: ["/bin/sh", "-c"]
+      args: ["update-ca-certificates && cp -r /etc/ssl/certs/* /artifact/"]
+      volumeMounts:
+        - name: certs
+          mountPath: /usr/local/share/ca-certificates/${configmap-name}.crt
+          subPath: ${configmap-name}.pem
+          readOnly: false
+        - name: temp
+          mountPath: /artifact
+          readOnly: false
+
+  volumeMounts:
+    - name: temp
+      mountPath: /etc/ssl/certs
+      readOnly: false
+
+  volumes:
+    - name: certs
+      configMap:
+        name: ${configmap-name}
+    - name: temp
+      emptyDir: {}

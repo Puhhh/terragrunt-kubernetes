@@ -1,0 +1,32 @@
+auth:
+  adminUser: ${admin-username}
+  adminPassword: ${admin-password}
+proxy: ${proxy-type}
+
+initContainers:
+  - name: init
+    image: grafana/alpine:3.15.4
+    command: ["/bin/sh", "-c"]
+    args: ["update-ca-certificates && cp -r /etc/ssl/certs/* /artifact/"]
+    volumeMounts:
+      - name: certs
+        mountPath: /usr/local/share/ca-certificates/${configmap-name}.crt
+        subPath: ${configmap-name}.pem
+        readOnly: false
+      - name: temp
+        mountPath: /artifact
+        readOnly: false
+
+extraVolumeMounts:
+  - name: temp
+    mountPath: /etc/ssl/certs
+    readOnly: false
+
+extraVolumes:
+  - name: certs
+    configMap:
+      name: ${configmap-name}
+  - name: temp
+    emptyDir: {}
+
+customCaExistingSecret: ${custom-certificates-secret-name}
