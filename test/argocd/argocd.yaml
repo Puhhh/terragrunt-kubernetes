@@ -3,7 +3,7 @@ global:
   domain: ${argocd-host}
 
 controller:
-  replicas: ${replicas-count}
+  replicas: 1
 
   resources:
     limits:
@@ -14,7 +14,7 @@ controller:
       memory: 256Mi
 
 applicationSet:
-  replicaCount: ${replicas-count}
+  replicaCount: 1
 
   resources:
     limits:
@@ -48,11 +48,11 @@ repoServer:
     behavior: {}
     enabled: false
     maxReplicas: 5
-    minReplicas: ${replicas-count}
+    minReplicas: 1
     targetCPUUtilizationPercentage: 50
     targetMemoryUtilizationPercentage: 50
 
-  replicas: ${replicas-count}
+  replicas: 1
 
   resources:
     limits:
@@ -110,11 +110,11 @@ server:
     behavior: {}
     enabled: false
     maxReplicas: 5
-    minReplicas: ${replicas-count}
+    minReplicas: 1
     targetCPUUtilizationPercentage: 50
     targetMemoryUtilizationPercentage: 50
 
-  replicas: ${replicas-count}
+  replicas: 1
 
   resources:
     limits:

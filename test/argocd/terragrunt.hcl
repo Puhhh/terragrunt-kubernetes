@@ -3,12 +3,13 @@ include "root" {
 }
 
 terraform {
-  source = "git::https://github.com/Puhhh/terraform-kubernetes-argocd.git?ref=v1.0.0"
+  source = "git::https://github.com/Puhhh/terraform-kubernetes-argocd.git?ref=v1.0.2"
 }
 
 inputs = {
   helm-custom-values      = true
   helm-custom-values-path = "argocd.yaml"
+  helm-chart-version      = "7.5.2"
   argocd-host             = "argocd.kubernetes.local"
   configmap-name          = "kubernetes-local"
 }

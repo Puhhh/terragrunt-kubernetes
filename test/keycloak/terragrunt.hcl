@@ -3,15 +3,16 @@ include "root" {
 }
 
 terraform {
-  source = "git::https://github.com/Puhhh/terraform-argocd-keycloak.git?ref=v1.0.0"
+  source = "git::https://github.com/Puhhh/terraform-argocd-keycloak.git?ref=v1.0.1"
 }
 
 inputs = {
-  argocd-token            = "eyJhb...9XTg0"
+  argocd-token            = "eyJhb...8yY84"
   argocd-server           = "argocd.kubernetes.local:443"
   tls-verify-skip         = true
   helm-custom-values      = true
   helm-custom-values-path = "keycloak.yaml"
+  helm-chart-version      = "22.2.2"
   configmap-name          = "kubernetes-local"
   admin-username          = "admin"
   admin-password          = "admin"

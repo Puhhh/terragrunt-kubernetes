@@ -1,3 +1,4 @@
+/*
 remote_state {
   backend = "s3"
   generate = {
@@ -11,8 +12,7 @@ remote_state {
     region = "eu-north-1"
   }
 }
-
-/*
+*/
 
 remote_state {
   backend = "kubernetes"
@@ -30,5 +30,3 @@ locals {
   is_windows  = (try(regex("^win", getenv("OS")), "") != "")
   config_path = local.is_windows ? "~\\.kube\\config" : "~/.kube/config"
 }
-
-*/
