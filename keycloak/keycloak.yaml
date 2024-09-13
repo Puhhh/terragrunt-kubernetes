@@ -30,3 +30,16 @@ extraVolumes:
     emptyDir: {}
 
 customCaExistingSecret: ${custom-certificates-secret-name}
+
+postgresql:
+  enabled: ${default-postgresql}
+
+externalDatabase:
+  existingSecret: keycloak-pg-secret
+  existingSecretHostKey: db-host
+  existingSecretPortKey: db-port
+  existingSecretDatabaseKey: db-name
+  existingSecretUserKey: username
+  existingSecretPasswordKey: password
+
+production: true
