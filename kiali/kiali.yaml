@@ -1,0 +1,30 @@
+metrics:
+  enabled: false
+
+debug:
+  enabled: false
+
+allowAdHocKialiImage: false # true to use custom image
+
+cr:
+  create: true
+  name: kiali
+  namespace: istio-system
+  spec:
+    auth:
+      strategy: openid
+      openid:
+        client_id: "kiali"
+        disable_rbac: true
+        issuer_uri: "https://keycloak.kubernetes.local/realms/kubernetes"
+        scopes: ["openid", "email", "groups"]
+        username_claim: "email"
+    external_services:
+      prometheus:
+        url: "http://kube-prometheus-stack-prometheus.monitoring:9090/"
+      grafana:
+        enabled: false
+      istio:
+        ingress_gateway_namespace: "istio-ingress"
+    istio_labels:
+      ingress_gateway_label: "istio=gateway"
