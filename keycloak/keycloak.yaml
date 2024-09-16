@@ -1,7 +1,7 @@
 auth:
-  adminUser: ${admin-username}
-  adminPassword: ${admin-password}
-proxy: ${proxy-type}
+  adminUser: ${admin_username}
+  adminPassword: ${admin_password}
+proxy: ${proxy_type}
 
 initContainers:
   - name: init
@@ -10,8 +10,8 @@ initContainers:
     args: ["update-ca-certificates && cp -r /etc/ssl/certs/* /artifact/"]
     volumeMounts:
       - name: certs
-        mountPath: /usr/local/share/ca-certificates/${configmap-name}.crt
-        subPath: ${configmap-name}.pem
+        mountPath: /usr/local/share/ca-certificates/${configmap_name}.crt
+        subPath: ${configmap_name}.pem
         readOnly: false
       - name: temp
         mountPath: /artifact
@@ -25,21 +25,21 @@ extraVolumeMounts:
 extraVolumes:
   - name: certs
     configMap:
-      name: ${configmap-name}
+      name: ${configmap_name}
   - name: temp
     emptyDir: {}
 
-customCaExistingSecret: ${custom-certificates-secret-name}
+customCaExistingSecret: ${custom_certificates_secret_name}
 
 postgresql:
-  enabled: ${default-postgresql}
+  enabled: ${default_postgresql}
 
 externalDatabase:
-  existingSecret: keycloak-pg-secret
-  existingSecretHostKey: db-host
-  existingSecretPortKey: db-port
-  existingSecretDatabaseKey: db-name
-  existingSecretUserKey: username
-  existingSecretPasswordKey: password
+  existingSecret: ${db_credentials_secret.secret_name}
+  existingSecretHostKey: ${db_credentials_secret.host_key}
+  existingSecretPortKey: ${db_credentials_secret.port_key}
+  existingSecretDatabaseKey: ${db_credentials_secret.dbname_key}
+  existingSecretUserKey: ${db_credentials_secret.username_key}
+  existingSecretPasswordKey: ${db_credentials_secret.password_key}
 
-production: true
+production: ${production_mode}
