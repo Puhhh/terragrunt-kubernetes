@@ -30,3 +30,9 @@ cgroup:
 
 k8sServiceHost: "localhost"
 k8sServicePort: 7445
+
+# Integration with Istio
+socketLB:
+  hostNamespaceOnly: true
+cni:
+  exclusive: false

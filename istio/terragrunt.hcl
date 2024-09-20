@@ -3,7 +3,7 @@ include "root" {
 }
 
 terraform {
-  source = "git::https://github.com/Puhhh/terraform-kubernetes-istio.git?ref=v1.0.1"
+  source = "git::https://github.com/Puhhh/terraform-kubernetes-istio.git?ref=v1.0.3"
 }
 
 inputs = {
@@ -13,11 +13,12 @@ inputs = {
     istiod             = "istiod.yaml"
     istio-ingress      = "istio-ingress.yaml"
     peerauthentication = "peerauthentication.yaml"
+    istio-gateway      = "istio-gateway.yaml"
   }
   helm-chart-version = {
     istio           = "1.23.1"
     custom-manifest = "0.0.1"
   }
-  peerauthentication-mode = "DISABLE"
-  istio-ingress-gateway   = true
+  istio-ingress-gateway = true
+  use-istio-cni         = true
 }

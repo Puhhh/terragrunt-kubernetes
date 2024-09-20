@@ -6,3 +6,8 @@ resources:
   limits:
     cpu: 100m
     memory: 128Mi
+
+# Disable the Privileged Init Container Injection
+pilot:
+  cni:
+    enabled: true
