@@ -22,7 +22,7 @@ generate "module" {
 module "istio-network" {
   source = "github.com/Puhhh/terraform-istio-network"
 
-  tls-name                       = helm_release.argocd.name
+  tls-name                       = "argocd"
   server-url                     = "argocd.kubernetes.local"
   tls-certificate-files          = true
   tls-crt                        = "LS0tL...tLQo="
