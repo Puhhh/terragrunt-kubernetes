@@ -3,7 +3,7 @@ include "root" {
 }
 
 terraform {
-  source = "git::https://github.com/Puhhh/terraform-kubernetes-keycloak.git?ref=v1.0.2"
+  source = "git::https://github.com/Puhhh/terraform-kubernetes-keycloak.git?ref=v1.0.3"
 }
 
 inputs = {
@@ -44,7 +44,7 @@ generate "module" {
   contents  = <<EOF
 
 module "istio_network" {
-  source = "github.com/Puhhh/terraform-istio-network"
+  source = "github.com/Puhhh/terraform-istio-network?ref=v1.0.1"
 
   tls-name                       = "keycloak"
   server-url                     = "keycloak.kubernetes.local"

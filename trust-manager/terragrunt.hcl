@@ -3,7 +3,7 @@ include "root" {
 }
 
 terraform {
-  source = "git::https://github.com/Puhhh/terraform-kubernetes-trust-manager.git?ref=v1.0.1"
+  source = "git::https://github.com/Puhhh/terraform-kubernetes-trust-manager.git?ref=v1.0.2"
 }
 
 inputs = {

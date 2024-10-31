@@ -3,7 +3,7 @@ include "root" {
 }
 
 terraform {
-  source = "git::https://github.com/Puhhh/terraform-kubernetes-istio.git?ref=v1.0.3"
+  source = "git::https://github.com/Puhhh/terraform-kubernetes-istio.git?ref=v1.0.4"
 }
 
 inputs = {

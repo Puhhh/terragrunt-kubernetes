@@ -3,7 +3,7 @@ include "root" {
 }
 
 terraform {
-  source = "git::https://github.com/Puhhh/terraform-kubernetes-kiali.git?ref=v1.0.3"
+  source = "git::https://github.com/Puhhh/terraform-kubernetes-kiali.git?ref=v1.0.4"
 
   after_hook "apply_patch" {
     commands = ["apply"]
@@ -89,7 +89,7 @@ generate "module" {
   contents  = <<EOF
 
 module "istio-network" {
-  source = "github.com/Puhhh/terraform-istio-network"
+  source = "github.com/Puhhh/terraform-istio-network?ref=v1.0.1"
 
   tls-name                       = "kiali"
   server-url                     = "kiali.kubernetes.local"

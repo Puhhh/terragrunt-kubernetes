@@ -3,7 +3,7 @@ include "root" {
 }
 
 terraform {
-  source = "git::https://github.com/Puhhh/terraform-kubernetes-prometheus.git?ref=v1.0.0"
+  source = "git::https://github.com/Puhhh/terraform-kubernetes-prometheus.git?ref=v1.0.1"
 }
 
 inputs = {

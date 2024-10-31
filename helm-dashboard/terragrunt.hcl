@@ -3,7 +3,7 @@ include "root" {
 }
 
 terraform {
-  source = "git::https://github.com/Puhhh/terraform-kubernetes-helm-dashboard.git?ref=v1.0.0"
+  source = "git::https://github.com/Puhhh/terraform-kubernetes-helm-dashboard.git?ref=v1.0.1"
 }
 
 inputs = {
@@ -16,7 +16,7 @@ generate "module" {
   contents  = <<EOF
 
 module "istio-network" {
-  source = "github.com/Puhhh/terraform-istio-network"
+  source = "github.com/Puhhh/terraform-istio-network?ref=v1.0.1"
 
   tls-name                       = "helm-dashboard"
   server-url                     = "helm-dashboard.kubernetes.local"

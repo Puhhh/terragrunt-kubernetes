@@ -3,7 +3,7 @@ include "root" {
 }
 
 terraform {
-  source = "git::https://github.com/Puhhh/terraform-kubernetes-argocd.git?ref=v1.0.2"
+  source = "git::https://github.com/Puhhh/terraform-kubernetes-argocd.git?ref=v1.0.3"
 }
 
 inputs = {
@@ -20,7 +20,7 @@ generate "module" {
   contents  = <<EOF
 
 module "istio-network" {
-  source = "github.com/Puhhh/terraform-istio-network"
+  source = "github.com/Puhhh/terraform-istio-network?ref=v1.0.1"
 
   tls-name                       = "argocd"
   server-url                     = "argocd.kubernetes.local"
