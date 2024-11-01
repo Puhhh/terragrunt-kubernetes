@@ -1,1 +1,1 @@
-# Deploy Kubernetes Cluster With Terraform & Terragrunt
+# Configure Kubernetes Cluster With Terraform & Terragrunt
