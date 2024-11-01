@@ -7,7 +7,7 @@ terraform {
 }
 
 inputs = {
-  deploy-method = "helm"
+  deploy_method = "helm"
 }
 
 generate "module" {
@@ -21,8 +21,8 @@ module "istio-network" {
   tls-name                       = "helm-dashboard"
   server-url                     = "helm-dashboard.kubernetes.local"
   tls-certificate-files          = true
-  tls-crt                        = "LS0tL...tLQo="
-  tls-key                        = "LS0tL...tLS0K"
+  tls-crt                        = "${yamldecode(sops_decrypt_file(find_in_parent_folders("secrets.enc.yaml"))).helm_dashboard.tls_crt}"
+  tls-key                        = "${yamldecode(sops_decrypt_file(find_in_parent_folders("secrets.enc.yaml"))).helm_dashboard.tls_key}"
   server-svc-name                = "helm-dashboard"
   server-svc-namemespace         = kubernetes_namespace.helm_dashboard_namespace.metadata[0].name
   destination-port               = 8080

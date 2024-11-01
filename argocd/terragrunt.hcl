@@ -25,9 +25,9 @@ module "istio-network" {
   tls-name                       = "argocd"
   server-url                     = "argocd.kubernetes.local"
   tls-certificate-files          = true
-  tls-crt                        = "LS0tL...tLQo="
-  tls-key                        = "LS0tL...tLS0K"
-  server-svc-name                = "argocd-server"
+  tls-crt                        = "${yamldecode(sops_decrypt_file(find_in_parent_folders("secrets.enc.yaml"))).argocd.tls_crt}"
+  tls-key                        = "${yamldecode(sops_decrypt_file(find_in_parent_folders("secrets.enc.yaml"))).argocd.tls_key}"
+  server-svc-name                = "argo-cd-argocd-server"
   server-svc-namemespace         = kubernetes_namespace.argocd-namespace.metadata[0].name
   destination-port               = 80
 }

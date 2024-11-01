@@ -12,12 +12,7 @@ inputs = {
   custom-bundle           = true
   custom-bundle-name      = "kubernetes-local"
   pem-certificate         = <<EOT
------BEGIN CERTIFICATE-----
-
------END CERTIFICATE-----
------BEGIN CERTIFICATE-----
-
------END CERTIFICATE-----
+${yamldecode(sops_decrypt_file(find_in_parent_folders("secrets.enc.yaml"))).pki_bundle}
 EOT
 
 }
